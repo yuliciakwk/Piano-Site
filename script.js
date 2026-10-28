@@ -45,3 +45,19 @@ document.addEventListener('keydown', (event) => {
     navToggle.focus();
   }
 });
+
+
+/* ---------- 2. FAQ accordion ----------
+   Same idea as the menu: each question button flips its own
+   aria-expanded, and the CSS opens or closes the answer to match.
+   Several answers can be open at once, so visitors can compare them. */
+const faqQuestions = document.querySelectorAll('.faq-question');
+
+// querySelectorAll returns a list; forEach runs the function once for
+// each button (like "for button in faq_questions:" in Python)
+faqQuestions.forEach((button) => {
+  button.addEventListener('click', () => {
+    const isOpen = button.getAttribute('aria-expanded') === 'true';
+    button.setAttribute('aria-expanded', String(!isOpen));
+  });
+});

@@ -58,10 +58,18 @@
     <section id="performances">
       <h2>Performances</h2>
       <ul class="performance-list" role="list">
-        <li>Performed with the LAM Philharmonic Orchestra under renowned conductor Yip Wing-sie</li>
+        <li>Performed with the Hong Kong Philharmonic Orchestra under renowned conductor Yip Wing-sie</li>
         <li>Performed at Hong Kong City Hall</li>
-        <li>[Any other venues or performances]</li>
       </ul>
+
+      <!-- width and height let the browser reserve space before the image
+           loads, so the page doesn't jump. lazy: only load when scrolled near. -->
+      <figure class="performance-photo">
+        <img src="images/city-hall-concert-hall.webp"
+             alt="The concert hall at Hong Kong City Hall seen from the stage, with a grand piano in front of rows of red seats"
+             width="800" height="533" loading="lazy" decoding="async">
+        <figcaption>Concert Hall, Hong Kong City Hall. Photo: [credit]</figcaption>
+      </figure>
     </section>
 
     <section id="lessons">
@@ -94,29 +102,69 @@
       </blockquote>
     </section>
 
-<section id="faq">
-  <h2>Frequently Asked Questions</h2>
+    <!-- Accordion: each question is a <button> inside its <h3>, so it stays
+         a heading for screen readers AND works with the keyboard. The button's
+         aria-expanded says whether its answer is showing; aria-controls points
+         to the answer by id. Without JavaScript, all answers stay visible. -->
+    <section id="faq">
+      <h2>Frequently Asked Questions</h2>
 
-  <div class="faq-item">
-    <h3>What age can my child start lessons?</h3>
-    <p>Children can begin lessons from as young as 3 years old. Lessons for young beginners are adapted to their age and attention span, building a strong foundation from the very start.</p>
-  </div>
+      <div class="faq-item">
+        <h3>
+          <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-1">
+            What age can my child start lessons?
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+        </h3>
+        <div class="faq-answer" id="faq-answer-1">
+          <div class="faq-answer-inner">
+            <p>Children can begin lessons from as young as 3 years old. Lessons for young beginners are adapted to their age and attention span, building a strong foundation from the very start.</p>
+          </div>
+        </div>
+      </div>
 
-  <div class="faq-item">
-    <h3>Do you offer online lessons?</h3>
-    <p>Yes. Jasmine has taught online since 2020 and continues to offer virtual lessons in both piano playing and music theory over Zoom, Google Meet or WhatsApp video call.</p>
-  </div>
+      <div class="faq-item">
+        <h3>
+          <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-2">
+            Do you offer online lessons?
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+        </h3>
+        <div class="faq-answer" id="faq-answer-2">
+          <div class="faq-answer-inner">
+            <p>Yes. Jasmine has taught online since 2020 and continues to offer virtual lessons in both piano playing and music theory over Zoom, Google Meet or WhatsApp video call.</p>
+          </div>
+        </div>
+      </div>
 
-  <div class="faq-item">
-    <h3>Do I need a piano at home?</h3>
-    <p>Yes, regular practice at home is essential for steady progress. An acoustic piano is ideal, but a digital piano with 88 full-sized, weighted keys is a great option for beginners. Feel free to ask for advice on choosing an instrument.</p>
-  </div>
+      <div class="faq-item">
+        <h3>
+          <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-3">
+            Do I need a piano at home?
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+        </h3>
+        <div class="faq-answer" id="faq-answer-3">
+          <div class="faq-answer-inner">
+            <p>Yes, regular practice at home is essential for steady progress. An acoustic piano is ideal, but a digital piano with 88 full-sized, weighted keys is a great option for beginners. Feel free to ask for advice on choosing an instrument.</p>
+          </div>
+        </div>
+      </div>
 
-  <div class="faq-item">
-    <h3>Do you prepare students for exams?</h3>
-    <p>Absolutely, exam preparation is a core part of Jasmine's teaching. She prepares students for Royal Conservatory of Music (RCM) examinations at every level, from the early grades all the way to the advanced ARCT diploma.</p>
-  </div>
-</section>
+      <div class="faq-item">
+        <h3>
+          <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-4">
+            Do you prepare students for exams?
+            <span class="faq-icon" aria-hidden="true"></span>
+          </button>
+        </h3>
+        <div class="faq-answer" id="faq-answer-4">
+          <div class="faq-answer-inner">
+            <p>Absolutely, exam preparation is a core part of Jasmine's teaching. She prepares students for Royal Conservatory of Music (RCM) examinations at every level, from the early grades all the way to the advanced ARCT diploma.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <section id="contact">
       <h2>Contact</h2>

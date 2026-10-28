@@ -521,6 +521,23 @@ section h2::after,
   border-top: 1px solid var(--line-color);
 }
 
+/* <figure> has default side margins in browsers; reset them */
+.performance-photo {
+  margin: var(--space-lg) 0 0;
+}
+
+.performance-photo img {
+  width: 100%;                   /* fill the column; height: auto (from the reset) keeps the shape */
+}
+
+/* Small print caption, like the photo credits in a concert programme */
+.performance-photo figcaption {
+  margin-top: var(--space-xs);
+  color: var(--color-muted);     /* 6.5:1 on ivory */
+  font-size: 0.8125rem;
+  letter-spacing: 0.05em;
+}
+
 
 /* ---------- 9. Lessons ---------- */
 
@@ -587,10 +604,12 @@ cite {
 }
 
 
-/* ---------- 11. FAQ ----------
-   Basic layout only. It becomes an accordion in a later step. */
+/* ---------- 11. FAQ accordion ----------
+   Without JavaScript, every answer is visible and the questions look
+   like plain headings. With JavaScript (.js), answers start collapsed
+   and the button's aria-expanded attribute opens and closes them,
+   the same pattern as the mobile menu. */
 .faq-item {
-  padding-block: var(--space-md);
   border-bottom: 1px solid var(--line-color);
 }
 
@@ -599,11 +618,107 @@ cite {
 }
 
 .faq-item h3 {
+  margin: 0;
   font-size: 1.375rem;
 }
 
-.faq-item p {
-  margin-bottom: 0;
+/* The button fills the whole row, so the full width is clickable.
+   Buttons come with their own font, border and background, so we reset
+   them to look like the heading text. */
+.faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  width: 100%;
+  padding-block: var(--space-md);
+  padding-inline: 0;
+  background: none;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+}
+
+.js .faq-question {
+  cursor: pointer;
+}
+
+.faq-question:hover {
+  color: var(--accent-color);
+}
+
+/* Plus icon: two thin lines crossing. When open, the vertical line
+   rotates flat, turning the plus into a minus. Only shown with JS,
+   because without JS the button does nothing. */
+.faq-icon {
+  display: none;
+}
+
+.js .faq-icon {
+  position: relative;
+  display: block;
+  flex-shrink: 0;                /* don't let long questions squash the icon */
+  width: 0.875rem;
+  height: 0.875rem;
+  color: var(--accent-color);
+}
+
+.js .faq-icon::before,
+.js .faq-icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: currentColor;
+}
+
+.js .faq-icon::after {
+  transform: rotate(90deg);      /* the vertical line of the plus */
+}
+
+.faq-question[aria-expanded="true"] .faq-icon::after {
+  transform: rotate(0deg);       /* lies flat over the other line: a minus */
+}
+
+/* Collapsing the answer smoothly. Browsers can't animate height to
+   "auto", but they CAN animate a grid row from 0fr (no share of the
+   space) to 1fr (all the space the content needs). The inner div
+   hides whatever doesn't fit while it is collapsing. */
+.js .faq-answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;            /* hides collapsed answers from screen readers too */
+}
+
+/* :has() selects an element by what it contains: "a .faq-item that
+   has an expanded button inside it" */
+.js .faq-item:has([aria-expanded="true"]) .faq-answer {
+  grid-template-rows: 1fr;
+  visibility: visible;
+}
+
+.faq-answer-inner {
+  overflow: hidden;
+}
+
+.faq-answer p {
+  margin: 0;
+  padding-bottom: var(--space-md);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .js .faq-answer {
+    transition:
+      grid-template-rows var(--duration-fast) var(--ease-out),
+      visibility var(--duration-fast);
+  }
+
+  .js .faq-icon::after {
+    transition: transform var(--duration-fast) var(--ease-out);
+  }
 }
 
 
