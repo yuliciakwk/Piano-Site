@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jasmine Wong Piano Studio</title>
+
+  <!-- Google Fonts: preconnect opens the connections early so the fonts arrive sooner -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@400;500&display=swap">
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Adds a "js" class to <html> straight away, so CSS can tell JavaScript is
+       running. Without JS, the menu stays visible instead of hidden behind a button. -->
+  <script>document.documentElement.classList.add('js');</script>
+
+  <!-- defer: download in parallel, run after the HTML has been read -->
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <header class="site-header theme-dark">
+    <a href="#hero" class="brand">Jasmine Wong</a>
+
+    <nav aria-label="Main">
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav-list">
+        <span class="nav-toggle-icon" aria-hidden="true"></span>
+        Menu
+      </button>
+
+      <ul class="nav-list" id="nav-list" role="list">
+        <li><a href="#about">About</a></li>
+        <li><a href="#performances">Performances</a></li>
+        <li><a href="#lessons">Lessons</a></li>
+        <li><a href="#approach">Teaching</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <section id="hero" class="theme-dark">
+      <h1>Jasmine Wong Piano Studio</h1>
+      <p>Piano lessons with a classically trained pianist and teacher in Richmond, BC.</p>
+      <a href="#contact" class="button">Book a lesson</a>
+    </section>
+
+    <section id="about">
+      <h2>About Jasmine</h2>
+      <p>An accomplished pianist, Jasmine began playing at the age of four. By nine, she had already reached performer level, passing exams set by the Associated Board of the Royal Schools of Music (ABRSM) and Trinity College London.</p>
+      <p>At 13, while most of her peers were still focused on school, Jasmine was both studying and teaching piano. From 16 to 19, she travelled to England for three months each year to complete her piano program and graduate from the music academy. She later continued her studies at the Hong Kong Music Institute, including training in conducting.</p>
+    </section>
+
+    <section id="performances">
+      <h2>Performances</h2>
+      <ul class="performance-list" role="list">
+        <li>Performed with the LAM Philharmonic Orchestra under renowned conductor Yip Wing-sie</li>
+        <li>Performed at Hong Kong City Hall</li>
+        <li>[Any other venues or performances]</li>
+      </ul>
+    </section>
+
+    <section id="lessons">
+      <h2>Lessons</h2>
+      <div class="lesson-grid">
+        <div class="lesson-card">
+          <h3>[Beginner Lessons]</h3>
+          <p>[Ages, length, what's covered]</p>
+          <p>[Price, if she wants it listed]</p>
+        </div>
+        <div class="lesson-card">
+          <h3>[Intermediate & Advanced]</h3>
+          <p>[Details]</p>
+          <p>[Price]</p>
+        </div>
+        <div class="lesson-card">
+          <h3>[Exam Preparation]</h3>
+          <p>[Which exams: ABRSM, Trinity, RCM]</p>
+          <p>[Price]</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="approach" class="theme-dark">
+      <h2>Teaching Approach</h2>
+      <p>Jasmine is known for her disciplined, structured approach to teaching. Under her guidance, many young students have gone on to become accomplished, master-level pianists themselves.</p>
+      <blockquote>
+        <p>"Where words fail, music speaks."</p>
+        <cite>Hans Christian Andersen</cite>
+      </blockquote>
+    </section>
+
+<section id="faq">
+  <h2>Frequently Asked Questions</h2>
+
+  <div class="faq-item">
+    <h3>What age can my child start lessons?</h3>
+    <p>Children can begin lessons from as young as 3 years old. Lessons for young beginners are adapted to their age and attention span, building a strong foundation from the very start.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>Do you offer online lessons?</h3>
+    <p>Yes. Jasmine has taught online since 2020 and continues to offer virtual lessons in both piano playing and music theory over Zoom, Google Meet or WhatsApp video call.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>Do I need a piano at home?</h3>
+    <p>Yes, regular practice at home is essential for steady progress. An acoustic piano is ideal, but a digital piano with 88 full-sized, weighted keys is a great option for beginners. Feel free to ask for advice on choosing an instrument.</p>
+  </div>
+
+  <div class="faq-item">
+    <h3>Do you prepare students for exams?</h3>
+    <p>Absolutely, exam preparation is a core part of Jasmine's teaching. She prepares students for Royal Conservatory of Music (RCM) examinations at every level, from the early grades all the way to the advanced ARCT diploma.</p>
+  </div>
+</section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:jasminewong815@hotmail.com">jasminewong815@hotmail.com</a></p>
+      <p>Phone: (778) 999-6815</p>
+      <p>Location: Richmond, BC</p>
+    </section>
+
+  </main>
+
+  <footer class="theme-dark">
+    <p>&copy; 2026 Jasmine Wong Piano Studio</p>
+  </footer>
+
+</body>
+</html>
