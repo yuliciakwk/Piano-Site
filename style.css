@@ -433,24 +433,82 @@ section h2::after,
 }
 
 
-/* ---------- 7. Hero ---------- */
+/* ---------- 7. Hero ----------
+   Designed like the cover of a concert programme: a framed panel with
+   her name set very large, a small italic line above it, and the
+   studio name in widely spaced capitals below. */
 #hero {
+  --content-width: 60rem;        /* wider than the text sections, for the frame */
+
   display: flex;
   flex-direction: column;
-  align-items: center;           /* centre horizontally */
-  justify-content: center;       /* centre vertically */
+  justify-content: center;       /* centre the frame vertically */
   min-height: 85vh;              /* fallback for older browsers */
   min-height: 85svh;             /* "small viewport height": ignores mobile browser toolbars */
+  padding-block: var(--space-lg);
   text-align: center;
 }
 
-#hero p {
-  margin-bottom: 0;
+/* The double gold frame. The border is the outer line. The outline is
+   the inner line: a negative outline-offset draws it INSIDE the
+   border, and outlines never take up space or shift the layout.
+   clamp() gives the padding a sensible minimum on phones and
+   maximum on big screens. */
+.hero-frame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(3rem, 9vw, 6rem) clamp(1.5rem, 6vw, 5rem);
+  border: 1px solid var(--line-color);
+  outline: 1px solid var(--line-color);
+  outline-offset: -0.5rem;
+}
+
+/* Small italic line above the name, in gold */
+.hero-eyebrow {
+  margin: 0 0 var(--space-sm);
+  color: var(--accent-color);
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-style: italic;
+}
+
+#hero h1 {
+  margin: 0;
+}
+
+/* The two spans are inline by default (they'd sit on one line);
+   display: block puts each on its own line */
+.hero-name {
+  display: block;
+  font-size: clamp(3.25rem, 13vw, 8.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.01em;       /* very large type looks better slightly tighter */
+}
+
+/* Letter-spacing adds space after every letter, including the last,
+   which would push the text off-centre. Matching padding on the left
+   balances it. */
+.hero-studio {
+  display: block;
+  margin-top: var(--space-md);
+  padding-left: 0.45em;
+  color: var(--text-color);
+  font-family: var(--font-sans);
+  font-size: clamp(0.75rem, 1.6vw, 0.9375rem);
+  font-weight: 500;
+  letter-spacing: 0.45em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.hero-tagline {
+  margin: var(--space-md) 0 0;   /* space below the gold line */
 }
 
 /* Entrance animation. Each piece rises into place a moment after the
-   one before: title, then the gold line drawing outwards, then the
-   tagline, then the button.
+   one before: the frame, the italic line, her name, the studio name,
+   the gold line drawing outwards, the tagline, then the button.
 
    The animation sits inside "no-preference", so it is only ADDED for
    people who haven't asked their device to reduce motion. Everyone
@@ -475,30 +533,52 @@ section h2::after,
   }
 }
 
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
+  /* The frame fades in without moving, so the panel feels steady
+     while its contents arrive */
+  .hero-frame {
+    animation: fade-in var(--duration-slow) var(--ease-out) both;
+  }
+
   /* "both" keeps each element at its "from" state while it waits for
      its delay (so nothing flashes up early), and at its "to" state
      once finished */
-  #hero h1,
-  #hero p,
+  .hero-eyebrow,
+  .hero-name,
+  .hero-studio,
+  .hero-tagline,
   #hero .button {
     animation: rise-in var(--duration-slow) var(--ease-out) both;
   }
 
-  #hero h1 {
-    animation-delay: 0.2s;
+  .hero-eyebrow {
+    animation-delay: 0.3s;
+  }
+
+  .hero-name {
+    animation-delay: 0.45s;
+  }
+
+  .hero-studio {
+    animation-delay: 0.65s;
   }
 
   #hero h1::after {
-    animation: draw-line var(--duration-slow) var(--ease-out) 0.7s both;
+    animation: draw-line var(--duration-slow) var(--ease-out) 0.85s both;
   }
 
-  #hero p {
-    animation-delay: 0.9s;
+  .hero-tagline {
+    animation-delay: 1s;
   }
 
   #hero .button {
-    animation-delay: 1.1s;
+    animation-delay: 1.15s;
   }
 }
 
