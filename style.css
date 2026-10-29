@@ -627,7 +627,7 @@ section h2::after,
 }
 
 
-/* ---------- 8. Piano-key strip ----------
+/* ---------- 8. About: piano-key strip and editorial layout ----------
    A thin keyboard drawn along the top edge of the About section,
    where the dark cover meets the ivory pages. It is decoration only,
    so it lives in CSS pseudo-elements, not in the HTML, and screen
@@ -711,6 +711,106 @@ section h2::after,
     );
     pointer-events: none;        /* never block clicks */
     animation: glissando 2.4s ease-in-out 1.8s both;
+  }
+}
+
+/* Drop cap: the first letter of the biography set large in gold
+   Garamond, sinking three lines into the paragraph, as in a printed
+   programme note. ::first-letter styles just that letter; the text in
+   the HTML is unchanged, so screen readers read the word normally.
+
+   The basic version floats an enlarged letter to the left, which works
+   in every browser. */
+.about-text > p:first-child::first-letter {
+  float: left;
+  margin: 0.1em 0.12em 0 0;
+  color: var(--accent-color);
+  font-family: var(--font-serif);
+  font-size: 4.25em;
+  line-height: 0.8;
+}
+
+/* @supports is a "feature query": the rules inside only apply in
+   browsers that understand initial-letter, a newer property made for
+   exactly this. It sizes and lines up the letter precisely with the
+   first three lines. Safari still needs the -webkit- prefix. */
+@supports (initial-letter: 3) or (-webkit-initial-letter: 3) {
+  .about-text > p:first-child::first-letter {
+    float: none;
+    margin: 0 0.12em 0 0;
+    -webkit-initial-letter: 3;
+    initial-letter: 3;
+  }
+}
+
+/* The portrait (once it is switched on in the HTML). A thin gold frame
+   sits behind the photo, shifted down and to the right, like a print
+   mounted slightly off its border.
+   isolation: isolate keeps the frame's z-index: -1 inside the figure,
+   so the frame goes behind the photo but not behind the page. */
+.about-portrait {
+  position: relative;
+  isolation: isolate;
+  max-width: 20rem;
+  margin: 0 auto var(--space-lg);
+}
+
+.about-portrait::before {
+  content: "";
+  position: absolute;
+  inset: 0;                      /* same size and place as the figure... */
+  z-index: -1;
+  border: 1px solid var(--accent-color);
+  transform: translate(0.75rem, 0.75rem);  /* ...then nudged down and right */
+}
+
+.about-portrait img {
+  width: 100%;
+}
+
+/* Desktop: an asymmetric, editorial layout. The heading (and portrait)
+   sit in a narrower left column, the biography in a wider right one,
+   instead of everything centred. */
+@media (width >= 64em) {
+  #about {
+    --content-width: 64rem;
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.75fr);
+    column-gap: clamp(3rem, 6vw, 6rem);
+    align-items: start;
+  }
+
+  /* :has() checks whether the section contains a portrait. If it does,
+     the left column gets more room for the photo. */
+  #about:has(.about-portrait) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+  }
+
+  #about hgroup {
+    grid-column: 1;
+    grid-row: 1;
+    margin-bottom: 0;
+    text-align: left;
+  }
+
+  /* Line the gold divider up with the left-aligned heading */
+  #about h2::after {
+    margin-left: 0;
+  }
+
+  .about-portrait {
+    grid-column: 1;
+    grid-row: 2;
+    max-width: none;
+    margin: var(--space-lg) 0 0;
+  }
+
+  /* The text spans both rows, so it runs alongside the heading
+     and the portrait */
+  .about-text {
+    grid-column: 2;
+    grid-row: 1 / span 2;
   }
 }
 
