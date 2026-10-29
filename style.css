@@ -1303,12 +1303,41 @@ address {
   text-align: center;
 }
 
+/* Each label is the icon plus the word, side by side.
+   inline-flex keeps the two on one line and centres them vertically. */
 .contact-list dt {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
   margin-bottom: var(--space-xs);
   color: var(--accent-color);
   font-size: 0.75rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
+}
+
+/* The icons draw with stroke="currentColor", so they take the label's
+   gold. flex-shrink: 0 stops them being squashed next to long labels. */
+.contact-icon {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+/* Hover effect for the clickable items (email and WhatsApp). The icon
+   is in the label and the link is in the value, so :has() connects
+   them: "an item that contains a hovered or keyboard-focused link".
+   Colour changes are fine for everyone; the small lift is movement, so
+   it is only added when reduced motion isn't requested. */
+.contact-list div:has(a:hover, a:focus-visible) .contact-icon {
+  color: var(--heading-color);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .contact-list div:has(a:hover, a:focus-visible) .contact-icon {
+    transform: translateY(-2px) scale(1.1);
+  }
 }
 
 /* Browsers indent <dd> by default; margin: 0 removes it.
