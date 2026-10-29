@@ -61,3 +61,54 @@ faqQuestions.forEach((button) => {
     button.setAttribute('aria-expanded', String(!isOpen));
   });
 });
+
+
+/* ---------- 3. Scroll-reveal animations ----------
+   An IntersectionObserver tells us when an element enters the screen.
+   That is much more efficient than checking every element's position
+   on every scroll event. When one appears, we add .is-visible and the
+   CSS plays the animation. */
+
+// matchMedia checks a CSS media query from JavaScript
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Only set this up if motion is welcome and the browser supports
+// IntersectionObserver ("feature detection"). Otherwise nothing is hidden.
+if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+  // Everything directly inside each section except the hero, which has
+  // its own entrance. The lesson grid is swapped for its three cards,
+  // so the cards can arrive one after another.
+  const revealTargets = document.querySelectorAll(
+    'main section:not(#hero) > :not(.lesson-grid), .lesson-card'
+  );
+
+  // The observer calls this function with a list of "entries": one for
+  // each watched element that has crossed into or out of view
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    let staggerIndex = 0;
+
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) {
+        return;                  // not on screen yet: skip it (like "continue" in Python)
+      }
+
+      // Items arriving together each start 120ms after the one before.
+      // `${...}` inserts a value into a string, like an f-string in Python.
+      entry.target.style.setProperty('--reveal-delay', `${staggerIndex * 120}ms`);
+      entry.target.classList.add('is-visible');
+
+      // Each element only animates once, so stop watching it
+      observer.unobserve(entry.target);
+      staggerIndex += 1;
+    });
+  }, {
+    // Shrink the "screen" by 10% at the bottom, so elements start
+    // revealing once they are slightly into view, not right at the edge
+    rootMargin: '0px 0px -10% 0px'
+  });
+
+  revealTargets.forEach((element) => {
+    element.classList.add('reveal');
+    revealObserver.observe(element);
+  });
+}

@@ -58,18 +58,28 @@
     <section id="performances">
       <h2>Performances</h2>
       <ul class="performance-list" role="list">
-        <li>Performed with the Hong Kong Philharmonic Orchestra under renowned conductor Yip Wing-sie</li>
-        <li>Performed at Hong Kong City Hall</li>
+        <!-- Each photo sits inside the list item it illustrates.
+             width and height let the browser reserve space before the image
+             loads, so the page doesn't jump. lazy: only load when scrolled near. -->
+        <li>
+          Performed with the Hong Kong Philharmonic Orchestra under renowned conductor Yip Wing-sie
+          <figure class="performance-photo">
+            <img src="images/orchestra-and-choir.webp"
+                 alt="A full orchestra and choir taking their bows on a wooden concert stage, with soloists at the front and an applauding audience in the foreground"
+                 width="1200" height="800" loading="lazy" decoding="async">
+            <figcaption>An orchestra and choir take their bows at the end of a concert.</figcaption>
+          </figure>
+        </li>
+        <li>
+          Performed at Hong Kong City Hall
+          <figure class="performance-photo">
+            <img src="images/city-hall-concert-hall.webp"
+                 alt="The concert hall at Hong Kong City Hall seen from the stage, with a grand piano in front of rows of red seats"
+                 width="800" height="533" loading="lazy" decoding="async">
+            <figcaption>Concert Hall, Hong Kong City Hall. Photo: [credit]</figcaption>
+          </figure>
+        </li>
       </ul>
-
-      <!-- width and height let the browser reserve space before the image
-           loads, so the page doesn't jump. lazy: only load when scrolled near. -->
-      <figure class="performance-photo">
-        <img src="images/city-hall-concert-hall.webp"
-             alt="The concert hall at Hong Kong City Hall seen from the stage, with a grand piano in front of rows of red seats"
-             width="800" height="533" loading="lazy" decoding="async">
-        <figcaption>Concert Hall, Hong Kong City Hall. Photo: [credit]</figcaption>
-      </figure>
     </section>
 
     <section id="lessons">

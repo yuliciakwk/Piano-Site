@@ -37,6 +37,7 @@
   /* Each list ends with fallbacks in case the web font fails to load */
   --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   --font-sans: "Jost", "Futura", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-size-body: 1.0625rem;   /* 17px by default; rem follows the user's browser setting */
 
   /* Spacing scale: using only these keeps the rhythm consistent */
   --space-xs: 0.5rem;
@@ -55,6 +56,30 @@
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --duration-fast: 0.4s;         /* hover and focus feedback */
   --duration-slow: 1.2s;         /* entrances */
+}
+
+/* Larger screens: more breathing room and slightly larger text.
+   Only the tokens change here. Every rule that uses them (section
+   padding, gutters, the header, body text) updates automatically.
+
+   Breakpoints are in em, not px, so they also respond when someone
+   zooms or sets a bigger default font size. They are typed out as
+   numbers because CSS variables can't be used inside media queries.
+     48em = about 768px (tablet)
+     64em = about 1024px (laptop and desktop) */
+@media (width >= 48em) {
+  :root {
+    --gutter: 2.5rem;
+    --space-xl: 7rem;            /* space above and below each section */
+  }
+}
+
+@media (width >= 64em) {
+  :root {
+    --gutter: 4rem;
+    --space-xl: 9rem;
+    --font-size-body: 1.125rem;  /* 18px: easier reading on a monitor further away */
+  }
 }
 
 
@@ -97,7 +122,7 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);      /* charcoal: softer than pure ink, still 13.4:1 */
   font-family: var(--font-sans);
-  font-size: 1.0625rem;          /* 17px by default; rem follows the user's browser setting */
+  font-size: var(--font-size-body);
   line-height: 1.7;
 }
 
@@ -521,9 +546,10 @@ section h2::after,
   border-top: 1px solid var(--line-color);
 }
 
-/* <figure> has default side margins in browsers; reset them */
+/* <figure> has default side margins in browsers; reset them.
+   The top margin separates the photo from its list item's text. */
 .performance-photo {
-  margin: var(--space-lg) 0 0;
+  margin: var(--space-sm) 0 var(--space-xs);
 }
 
 .performance-photo img {
@@ -548,10 +574,20 @@ section h2::after,
   --content-width: 64rem;
 }
 
-/* Grid with one column on phones; more columns are added in a media query later */
+/* One column on phones and tablets */
 .lesson-grid {
   display: grid;
   gap: var(--space-md);
+}
+
+/* Three equal columns on desktop. 1fr = one equal share of the free
+   space. Grid also makes cards in the same row equal height
+   automatically, even if one has more text. Tablets keep one column:
+   two columns would leave the third card alone on its own row. */
+@media (width >= 64em) {
+  .lesson-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .lesson-card {
@@ -735,4 +771,27 @@ footer {
 footer p {
   margin: 0 auto;
   color: var(--color-ivory-muted);
+}
+
+
+/* ---------- 13. Scroll-reveal animations ----------
+   JavaScript adds .reveal to content below the hero, then adds
+   .is-visible as each piece scrolls into view. If JavaScript doesn't
+   run, or the person prefers reduced motion, neither class is ever
+   added, so all content simply stays visible.
+
+   This reuses the hero's rise-in keyframes, so every entrance on the
+   site moves the same way. */
+.reveal {
+  opacity: 0;
+}
+
+/* --reveal-delay is set by JavaScript, to stagger items that come into
+   view together. "backwards" holds the invisible starting frame during
+   that delay. Unlike "both", it lets go once the animation ends, so the
+   card hover lift still works afterwards. */
+.reveal.is-visible {
+  opacity: 1;
+  animation: rise-in var(--duration-slow) var(--ease-out) backwards;
+  animation-delay: var(--reveal-delay, 0s);
 }
