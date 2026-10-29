@@ -393,29 +393,46 @@ section {
 
 
 /* ---------- 6. Section headings ----------
-   Each h2 gets a Roman numeral above it, like the movements in a
-   concert programme, and a short gold line below it. */
+   Each section is labelled like a movement in a concert programme:
+   a gold Roman numeral and an italic movement name ("I. Prelude")
+   above the heading, and a short gold line below it. */
 main {
   counter-reset: section;        /* start a counter called "section" at 0 */
 }
 
-section h2 {
-  margin-bottom: var(--space-lg);
-  text-align: center;
-  counter-increment: section;    /* add 1 for every h2: I, II, III... */
+/* Add 1 for every section after the hero: I, II, III... */
+main > section:not(#hero) {
+  counter-increment: section;
 }
 
-section h2::before {
+hgroup {
+  margin-bottom: var(--space-lg);
+  text-align: center;
+}
+
+section h2 {
+  margin-bottom: 0;
+}
+
+/* The movement name. Paragraphs have a max-width (for reading), which
+   would leave this one sitting to the left of centre in wide sections,
+   so it is removed here. */
+.movement {
+  margin: 0 0 var(--space-xs);
+  max-width: none;
+  color: var(--accent-color);
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-style: italic;
+}
+
+.movement::before {
   /* The first line is a fallback for older browsers. The second
      adds empty alt text after the slash, so screen readers skip the
-     numeral and announce just "About Jasmine", not "I About Jasmine". */
-  content: counter(section, upper-roman);
-  content: counter(section, upper-roman) / "";
-  display: block;
-  margin-bottom: var(--space-xs);
-  color: var(--accent-color);
-  font-family: var(--font-serif);  /* serifs keep "III" reading as a numeral, not three bars */
-  font-size: 1.125rem;
+     numeral and announce just "Prelude", not "I. Prelude". */
+  content: counter(section, upper-roman) ". ";
+  content: counter(section, upper-roman) ". " / "";
+  font-style: normal;            /* upright numerals, italic name */
   font-weight: 600;
   letter-spacing: 0.1em;
 }
