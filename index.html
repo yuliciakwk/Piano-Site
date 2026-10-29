@@ -271,22 +271,52 @@
         <p class="movement">Finale</p>
         <h2>Contact</h2>
       </hgroup>
-      <address>
-        <dl class="contact-list">
-          <div>
-            <dt>Email</dt>
-            <dd><a href="mailto:jasminewong815@hotmail.com">jasminewong815@hotmail.com</a></dd>
-          </div>
-          <div>
-            <dt>Phone</dt>
-            <dd><a href="tel:+17789996815">(778) 999-6815</a></dd>
-          </div>
-          <div>
-            <dt>Location</dt>
-            <dd>Richmond, BC</dd>
-          </div>
-        </dl>
-      </address>
+
+      <p class="contact-intro">Have a question or want to book a lesson? Reach out any way you prefer.</p>
+
+      <div class="contact-layout">
+        <address>
+          <dl class="contact-list">
+            <div>
+              <dt>Email</dt>
+              <dd><a href="mailto:jasminewong815@hotmail.com">jasminewong815@hotmail.com</a></dd>
+            </div>
+            <div>
+              <!-- wa.me is WhatsApp's official "click to chat" link. The number
+                   goes in international format with no +, spaces or dashes:
+                   1 (Canada's country code) + 778 999 6815.
+                   target="_blank" opens it in a new tab; rel="noopener" stops
+                   that new tab from being able to control this page.
+                   The hidden text gives screen-reader users the full picture. -->
+              <dt>WhatsApp</dt>
+              <dd><a href="https://wa.me/17789996815" target="_blank" rel="noopener">778-999-6815<span class="visually-hidden"> on WhatsApp (opens in a new tab)</span></a></dd>
+            </div>
+            <div>
+              <!-- WeChat has no link a website can open, so the ID is plain
+                   text and the QR code below does the rest -->
+              <dt>WeChat</dt>
+              <dd>ID: [wechat id]</dd>
+            </div>
+            <div>
+              <dt>Location</dt>
+              <dd>Richmond, BC</dd>
+            </div>
+            <div>
+              <dt>Languages</dt>
+              <dd>Lessons in English, Cantonese and Mandarin</dd>
+            </div>
+          </dl>
+        </address>
+
+        <!-- width and height reserve the space before the image loads;
+             lazy means it only downloads when scrolled near -->
+        <figure class="wechat-qr">
+          <img src="images/wechat-qr.webp"
+               alt="WeChat QR code for Jasmine Wong. Scan it in the WeChat app to add her as a contact."
+               width="400" height="400" loading="lazy" decoding="async">
+          <figcaption>Scan in WeChat to add Jasmine</figcaption>
+        </figure>
+      </div>
     </section>
 
   </main>
