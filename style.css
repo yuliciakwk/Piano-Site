@@ -1078,6 +1078,38 @@ section h2::after,
   margin-bottom: 0;              /* the card's padding already provides the space */
 }
 
+/* The rate: centred below the cards between two hairlines, with the
+   price set large in Garamond like a figure in a printed programme */
+.pricing {
+  margin-top: var(--space-lg);
+  padding-block: var(--space-lg);
+  border-block: 1px solid var(--line-color);
+  text-align: center;
+}
+
+.pricing p {
+  margin-inline: auto;           /* centre the paragraph's 65ch box, not just its text */
+}
+
+.price {
+  margin-bottom: var(--space-sm);
+  color: var(--heading-color);
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 8vw, 4.5rem);
+  font-variant-numeric: lining-nums;  /* the same height as the "$", like the phone number */
+  line-height: 1;
+}
+
+/* "per hour": small spaced capitals next to the large number */
+.price span {
+  margin-left: 0.25em;
+  color: var(--color-muted);     /* 6.5:1 on ivory */
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
 
 /* ---------- 11. Teaching approach and quote ----------
    The quote is the page's big dramatic moment: set very large in
