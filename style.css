@@ -1289,27 +1289,52 @@ cite::after {
 
 /* ---------- 13. Contact (the finale) ----------
    Dark like the cover, so the programme closes the way it opened.
-   Each detail is a small gold label above a larger serif value. */
+   A short intro, then the contact list beside the WeChat QR code on
+   larger screens, or above it on phones. Each detail is a small gold
+   label with an icon, above a larger serif value. */
+
+/* The intro: centred italic Garamond, like a line of programme notes */
+.contact-intro {
+  margin: 0 auto var(--space-lg);
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  font-style: italic;
+  text-align: center;
+  text-wrap: balance;            /* even lines when it wraps on phones */
+}
+
+/* Phones: everything in one column, the QR code below the list */
+.contact-layout {
+  display: grid;
+  gap: var(--space-lg);
+}
 
 /* Browsers italicise <address> by default */
 address {
   font-style: normal;
 }
 
+/* The details as a list separated by gold hairlines, like the
+   performances and FAQ, so the whole site shares one rhythm */
 .contact-list {
-  display: grid;
-  gap: var(--space-lg);
   margin: 0;
-  text-align: center;
 }
 
-/* Each label is the icon plus the word, side by side.
-   inline-flex keeps the two on one line and centres them vertically. */
+.contact-list > div {
+  padding-block: var(--space-sm);
+  border-bottom: 1px solid var(--line-color);
+}
+
+.contact-list > div:first-child {
+  border-top: 1px solid var(--line-color);
+}
+
+/* Each label is the icon plus the word, side by side, vertically centred */
 .contact-list dt {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 0.6rem;
-  margin-bottom: var(--space-xs);
+  margin-bottom: 0.25rem;
   color: var(--accent-color);
   font-size: 0.75rem;
   letter-spacing: 0.25em;
@@ -1340,14 +1365,18 @@ address {
   }
 }
 
-/* Browsers indent <dd> by default; margin: 0 removes it.
+/* Browsers indent <dd> by default; margin: 0 removes it. The left
+   padding (icon width + gap) lines each value up with its label's
+   text rather than its icon, so the icons hang in their own column.
    overflow-wrap: anywhere lets the long email address break onto a
    second line on very narrow screens instead of sticking out. */
 .contact-list dd {
   margin: 0;
+  padding-left: calc(1.25rem + 0.6rem);
   color: var(--heading-color);
   font-family: var(--font-serif);
   font-size: clamp(1.375rem, 3vw, 1.75rem);
+  line-height: 1.35;             /* tighter than body text, for large type that wraps */
   overflow-wrap: anywhere;
 
   /* Garamond uses "old-style" numbers by default, where some digits dip
@@ -1365,18 +1394,47 @@ address {
   color: var(--accent-color);
 }
 
-/* Desktop: the three details side by side. "auto" columns are only as
-   wide as their content, and justify-content: center keeps the group
-   centred, so the long email address gets the room it needs. */
+/* The WeChat QR code. QR codes need a light background and a clear
+   margin (a "quiet zone") to scan reliably, so the image sits on an
+   ivory tile, even in this dark section. The thin outline echoes the
+   double frame on the cover. */
+.wechat-qr {
+  margin: 0;
+  justify-self: center;          /* centred in its grid area on phones */
+  text-align: center;
+}
+
+.wechat-qr img {
+  width: 12rem;                  /* box-sizing: border-box, so this includes the padding */
+  padding: 0.75rem;
+  background-color: var(--color-surface);
+  outline: 1px solid var(--line-color);
+  outline-offset: 0.5rem;
+}
+
+.wechat-qr figcaption {
+  margin-top: var(--space-md);
+  color: var(--color-ivory-muted);  /* 6.4:1 on ink */
+  font-size: 0.8125rem;
+  letter-spacing: 0.05em;
+}
+
+/* Tablet and up: the list on the left, the QR code on the right.
+   The list column takes the free space (1fr) and the QR column is only
+   as wide as the QR code (auto). align-items: center lines the QR code
+   up with the middle of the list. */
+@media (width >= 48em) {
+  .contact-layout {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    column-gap: clamp(2.5rem, 6vw, 5rem);
+  }
+}
+
+/* Desktop: a little wider, so the list has room to breathe */
 @media (width >= 64em) {
   #contact {
-    --content-width: 64rem;
-  }
-
-  .contact-list {
-    grid-template-columns: repeat(3, auto);
-    justify-content: center;
-    column-gap: clamp(3rem, 6vw, 6rem);
+    --content-width: 52rem;
   }
 }
 
