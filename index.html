@@ -5,6 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jasmine Wong Piano Studio</title>
 
+  <!-- Shown under the title in search results -->
+  <meta name="description" content="Piano lessons in Richmond, BC with Jasmine Wong, a classically trained pianist and teacher. Lessons for beginners to advanced students, RCM exam preparation, and online lessons.">
+
+  <!-- Colours the browser's toolbar on phones to match the dark header -->
+  <meta name="theme-color" content="#1a1816">
+
+  <!-- Tab icon: a gold "J" on ink, drawn as a tiny inline SVG, so there is
+       no extra file to download. In a URL, "#" must be written as %23. -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%231a1816'/><text x='16' y='23' font-family='Georgia,serif' font-size='21' fill='%23b8975a' text-anchor='middle'>J</text></svg>">
+
   <!-- Google Fonts: preconnect opens the connections early so the fonts arrive sooner -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,6 +30,11 @@
   <script src="script.js" defer></script>
 </head>
 <body>
+
+  <!-- Skip link: the first thing a keyboard user reaches. It stays hidden
+       until it receives focus, then lets them jump past the navigation
+       straight to the content. -->
+  <a href="#main" class="skip-link">Skip to main content</a>
 
   <header class="site-header theme-dark">
     <a href="#hero" class="brand">Jasmine Wong</a>
@@ -41,7 +56,7 @@
     </nav>
   </header>
 
-  <main>
+  <main id="main">
 
     <!-- Styled like the cover of a concert programme. The <h1> still reads
          "Jasmine Wong Piano Studio" as one heading; the two <span>s only let
@@ -104,7 +119,14 @@
           </div>
           <p class="performance-detail">Under renowned conductor Yip Wing-sie</p>
           <figure class="performance-photo">
+            <!-- srcset lists the same photo at two sizes (w = its pixel width).
+                 sizes tells the browser how wide the photo will be shown at
+                 each screen size. The browser then downloads the smallest
+                 file that still looks sharp on that screen. -->
             <img src="images/orchestra-and-choir.webp"
+                 srcset="images/orchestra-and-choir-600.webp 600w,
+                         images/orchestra-and-choir.webp 1200w"
+                 sizes="(min-width: 80em) 31rem, (min-width: 48em) 42rem, calc(100vw - 2.5rem)"
                  alt="A full orchestra and choir taking their bows on a wooden concert stage, with soloists at the front and an applauding audience in the foreground"
                  width="1200" height="800" loading="lazy" decoding="async">
             <figcaption>An orchestra and choir take their bows at the end of a concert.</figcaption>
@@ -117,6 +139,9 @@
           </div>
           <figure class="performance-photo">
             <img src="images/city-hall-concert-hall.webp"
+                 srcset="images/city-hall-concert-hall-480.webp 480w,
+                         images/city-hall-concert-hall.webp 800w"
+                 sizes="(min-width: 80em) 31rem, (min-width: 48em) 42rem, calc(100vw - 2.5rem)"
                  alt="The concert hall at Hong Kong City Hall seen from the stage, with a grand piano in front of rows of red seats"
                  width="800" height="533" loading="lazy" decoding="async">
             <figcaption>Concert Hall, Hong Kong City Hall. Photo: [credit]</figcaption>

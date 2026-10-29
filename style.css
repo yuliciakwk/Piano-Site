@@ -220,6 +220,28 @@ section {
    The base styles show the links as a row. That is the desktop layout,
    and also what phones get if JavaScript fails, so the menu is never
    out of reach. The collapsible mobile menu is added further down. */
+
+/* Skip link: parked just above the top of the screen until it gets
+   keyboard focus, then it slides into view over the header. It isn't
+   display: none, because hidden-that-way elements can't receive focus. */
+.skip-link {
+  position: absolute;
+  top: var(--space-xs);
+  left: var(--gutter);
+  z-index: 20;                   /* above the sticky header (10) */
+  padding: var(--space-xs) var(--space-sm);
+  background-color: var(--color-gold);
+  color: var(--color-ink);       /* 6.4:1 on gold */
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
 .site-header {
   position: sticky;              /* scrolls with the page, then sticks to the top */
   top: 0;
