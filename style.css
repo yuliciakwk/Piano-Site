@@ -107,6 +107,12 @@ img {
    so the sticky header doesn't cover the section's heading */
 html {
   scroll-padding-top: var(--header-height);
+
+  /* A slim scrollbar in the site's colours: dark gold thumb on an
+     ivory track (5.2:1). These are the standard properties, supported
+     by Chrome, Edge and Firefox; Safari ignores them and keeps its own. */
+  scrollbar-color: var(--color-gold-dark) var(--color-ivory);
+  scrollbar-width: thin;
 }
 
 /* Nav links glide to their section instead of jumping, unless the
@@ -1009,28 +1015,46 @@ section h2::after,
 }
 
 
-/* ---------- 11. Teaching approach and quote ---------- */
+/* ---------- 11. Teaching approach and quote ----------
+   The quote is the page's big dramatic moment: set very large in
+   italic, between two hairlines, with the author's name framed by
+   short gold rules. */
 blockquote {
   margin: var(--space-xl) 0 0;
+  padding-block: var(--space-lg);
+  border-block: 1px solid var(--line-color);   /* hairlines above and below */
   text-align: center;
 }
 
 blockquote p {
-  margin-inline: auto;
+  margin: 0 auto var(--space-md);
+  max-width: none;               /* let the quote use the full width of the column */
   color: var(--heading-color);
   font-family: var(--font-serif);
-  font-size: clamp(1.75rem, 6vw, 2.5rem);
+  font-size: clamp(2.25rem, 7vw, 4rem);
   font-style: italic;
-  line-height: 1.3;
+  line-height: 1.15;
+  text-wrap: balance;            /* two even lines, not one long and one short */
 }
 
 cite {
-  display: block;
+  display: inline-flex;          /* lines up the rules and the name in a row */
+  align-items: center;
+  gap: var(--space-sm);
   color: var(--accent-color);
   font-size: 0.8125rem;
   font-style: normal;            /* browsers italicise <cite> by default */
   letter-spacing: 0.2em;
   text-transform: uppercase;
+}
+
+/* The short gold rules either side of the name */
+cite::before,
+cite::after {
+  content: "";
+  width: 2rem;
+  height: 1px;
+  background-color: currentColor;
 }
 
 
@@ -1152,23 +1176,116 @@ cite {
 }
 
 
-/* ---------- 13. Footer ---------- */
+/* ---------- 13. Contact (the finale) ----------
+   Dark like the cover, so the programme closes the way it opened.
+   Each detail is a small gold label above a larger serif value. */
+
+/* Browsers italicise <address> by default */
+address {
+  font-style: normal;
+}
+
+.contact-list {
+  display: grid;
+  gap: var(--space-lg);
+  margin: 0;
+  text-align: center;
+}
+
+.contact-list dt {
+  margin-bottom: var(--space-xs);
+  color: var(--accent-color);
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+/* Browsers indent <dd> by default; margin: 0 removes it.
+   overflow-wrap: anywhere lets the long email address break onto a
+   second line on very narrow screens instead of sticking out. */
+.contact-list dd {
+  margin: 0;
+  color: var(--heading-color);
+  font-family: var(--font-serif);
+  font-size: clamp(1.375rem, 3vw, 1.75rem);
+  overflow-wrap: anywhere;
+
+  /* Garamond uses "old-style" numbers by default, where some digits dip
+     below the line like lowercase letters. Lining numbers are all the
+     same height, which makes a phone number easier to read and copy. */
+  font-variant-numeric: lining-nums;
+}
+
+.contact-list dd a {
+  color: inherit;
+  text-decoration-color: var(--accent-color);
+}
+
+.contact-list dd a:hover {
+  color: var(--accent-color);
+}
+
+/* Desktop: the three details side by side. "auto" columns are only as
+   wide as their content, and justify-content: center keeps the group
+   centred, so the long email address gets the room it needs. */
+@media (width >= 64em) {
+  #contact {
+    --content-width: 64rem;
+  }
+
+  .contact-list {
+    grid-template-columns: repeat(3, auto);
+    justify-content: center;
+    column-gap: clamp(3rem, 6vw, 6rem);
+  }
+}
+
+
+/* ---------- 14. Footer ---------- */
+
+/* A hairline separates the footer from the dark Contact section above.
+   On phones the two items stack in the centre; from tablet width they
+   sit at either end of the row, lined up with the header above. */
 footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs) var(--space-lg);
   padding: var(--space-lg) var(--gutter);
+  border-top: 1px solid var(--line-color);
   font-size: 0.875rem;
   letter-spacing: 0.05em;
   text-align: center;
 }
 
+@media (width >= 48em) {
+  footer {
+    justify-content: space-between;
+  }
+}
+
 /* Set on the <p>, not the footer: .theme-dark is more specific than
    "footer", so a colour set on the footer itself would be overridden */
 footer p {
-  margin: 0 auto;
+  margin: 0;
   color: var(--color-ivory-muted);
 }
 
+.back-to-top {
+  color: var(--accent-color);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
 
-/* ---------- 14. Scroll-reveal animations ----------
+.back-to-top:hover {
+  color: var(--heading-color);
+}
+
+
+/* ---------- 15. Scroll-reveal animations ----------
    JavaScript adds .reveal to content below the hero, then adds
    .is-visible as each piece scrolls into view. If JavaScript doesn't
    run, or the person prefers reduced motion, neither class is ever
