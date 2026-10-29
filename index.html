@@ -75,12 +75,18 @@
         <p class="movement">Repertoire</p>
         <h2>Performances</h2>
       </hgroup>
+      <!-- Laid out like a printed programme or tour listing: the ensemble or
+           venue, a dotted leader line, then the city. Each photo sits inside
+           the list item it illustrates. width and height let the browser
+           reserve space before the image loads, so the page doesn't jump.
+           lazy: only load when scrolled near. -->
       <ul class="performance-list" role="list">
-        <!-- Each photo sits inside the list item it illustrates.
-             width and height let the browser reserve space before the image
-             loads, so the page doesn't jump. lazy: only load when scrolled near. -->
         <li>
-          Performed with the Hong Kong Philharmonic Orchestra under renowned conductor Yip Wing-sie
+          <div class="performance-entry">
+            <h3>Hong Kong Philharmonic Orchestra</h3>
+            <span class="performance-place">Hong Kong</span>
+          </div>
+          <p class="performance-detail">Under renowned conductor Yip Wing-sie</p>
           <figure class="performance-photo">
             <img src="images/orchestra-and-choir.webp"
                  alt="A full orchestra and choir taking their bows on a wooden concert stage, with soloists at the front and an applauding audience in the foreground"
@@ -89,7 +95,10 @@
           </figure>
         </li>
         <li>
-          Performed at Hong Kong City Hall
+          <div class="performance-entry">
+            <h3>Hong Kong City Hall</h3>
+            <span class="performance-place">Hong Kong</span>
+          </div>
           <figure class="performance-photo">
             <img src="images/city-hall-concert-hall.webp"
                  alt="The concert hall at Hong Kong City Hall seen from the stage, with a grand piano in front of rows of red seats"

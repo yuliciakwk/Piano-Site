@@ -635,7 +635,7 @@ section h2::after,
 }
 
 .performance-list li {
-  padding-block: var(--space-sm);
+  padding-block: var(--space-md) var(--space-sm);
   border-bottom: 1px solid var(--line-color);
 }
 
@@ -643,10 +643,84 @@ section h2::after,
   border-top: 1px solid var(--line-color);
 }
 
+/* One programme entry. On phones there isn't room for a leader line,
+   so the city sits above the name as a small label. order: -1 moves
+   it before the name visually, while the HTML (and so a screen
+   reader) still has the name first. */
+.performance-entry {
+  display: flex;
+  flex-direction: column;
+}
+
+.performance-entry h3 {
+  margin: 0;
+  font-size: 1.375rem;
+  font-weight: 400;
+  /* Turn off "balance" from the base h3 rule. Balancing shortens the
+     lines but not the box, which would leave a gap before the leader. */
+  text-wrap: wrap;
+}
+
+.performance-place {
+  order: -1;
+  margin-bottom: 0.25rem;
+  color: var(--color-muted);     /* 6.5:1 on ivory */
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* The dotted leader, drawn by ::before. Hidden on phones. */
+.performance-entry::before {
+  content: "";
+  display: none;
+}
+
+/* Tablet and up: one programme line, name ······· city.
+   The flex direction switches to a row, and the leader is stretched to
+   fill the space between the name and the city. */
+@media (width >= 48em) {
+  .performance-entry {
+    flex-direction: row;
+    align-items: baseline;       /* the dots and city sit on the name's baseline */
+    gap: 0.75rem;
+  }
+
+  .performance-place {
+    order: 2;
+    flex-shrink: 0;              /* never squash the city name */
+    margin-bottom: 0;
+  }
+
+  /* The leader comes first in the HTML order (::before), so order: 1
+     moves it between the name (order 0, the default) and the city
+     (order 2). flex: 1 makes it take all the leftover space.
+     The dots are a repeating radial gradient: one small gold circle,
+     tiled every 6px along a 2px-high strip. */
+  .performance-entry::before {
+    display: block;
+    order: 1;
+    flex: 1;
+    min-width: 1.5rem;
+    height: 2px;
+    background-image: radial-gradient(circle, var(--accent-color) 0.75px, transparent 1px);
+    background-size: 6px 2px;
+    background-repeat: repeat-x;
+  }
+}
+
+.performance-detail {
+  margin: var(--space-xs) 0 0;
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  font-style: italic;
+}
+
 /* <figure> has default side margins in browsers; reset them.
-   The top margin separates the photo from its list item's text. */
+   The top margin separates the photo from the text above it. */
 .performance-photo {
-  margin: var(--space-sm) 0 var(--space-xs);
+  margin: var(--space-md) 0 var(--space-xs);
 }
 
 .performance-photo img {
@@ -659,6 +733,41 @@ section h2::after,
   color: var(--color-muted);     /* 6.5:1 on ivory */
   font-size: 0.8125rem;
   letter-spacing: 0.05em;
+}
+
+/* Wide screens: the two performances sit side by side, each in its own
+   column, like facing pages of a programme.
+
+   This uses its own breakpoint, 80em (about 1280px), chosen by the
+   content: below it, a column is too narrow for "Hong Kong
+   Philharmonic Orchestra" plus the leader and the city on one line. */
+@media (width >= 80em) {
+  #performances {
+    --content-width: 64rem;
+  }
+
+  .performance-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: var(--space-lg);
+  }
+
+  /* Each list item is itself a grid that borrows the parent's rows
+     ("subgrid"), so the name lines, detail lines and photos line up
+     across both columns, even though only the first item has a detail
+     line. grid-row: span 3 = take up three rows of the parent grid. */
+  .performance-list li {
+    display: grid;
+    grid-row: span 3;
+    grid-template-rows: subgrid;
+    border-top: 1px solid var(--line-color);
+  }
+
+  /* Always put the photo in row 3. Without this, the second item's
+     photo would move up into the empty detail row. */
+  .performance-photo {
+    grid-row: 3;
+  }
 }
 
 
