@@ -103,6 +103,48 @@ img {
 
 /* ---------- 3. Base typography ---------- */
 
+/* Self-hosted fonts. Each @font-face tells the browser: "when CSS asks
+   for this family, weight and style, use this file".
+
+   Both fonts are variable fonts: one file contains a whole range of
+   weights, so "font-weight: 400 600" means this file covers 400 to 600.
+
+   unicode-range lists the characters in the file (Latin, plus curly
+   quotes, the arrow and a few symbols), so the browser only uses it for
+   those characters.
+
+   font-display: swap shows the text straight away in the fallback font
+   (Georgia or the system font), then swaps in the web font when it
+   arrives, so text is never invisible while fonts load.
+
+   Licence: SIL Open Font License, see fonts/OFL-*.txt */
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("fonts/cormorant-garamond.woff2") format("woff2");
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("fonts/cormorant-garamond-italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Jost";
+  src: url("fonts/jost.woff2") format("woff2");
+  font-weight: 400 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 /* When a nav link jumps to a section, stop short by the header's height
    so the sticky header doesn't cover the section's heading */
 html {

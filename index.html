@@ -15,10 +15,13 @@
        no extra file to download. In a URL, "#" must be written as %23. -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='4' fill='%231a1816'/><text x='16' y='23' font-family='Georgia,serif' font-size='21' fill='%23b8975a' text-anchor='middle'>J</text></svg>">
 
-  <!-- Google Fonts: preconnect opens the connections early so the fonts arrive sooner -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@400;500&display=swap">
+  <!-- The fonts are hosted with the site (see the fonts/ folder), so there is
+       no wait to connect to another server. preload asks the browser to start
+       downloading the two fonts used at the top of the page straight away,
+       instead of waiting until it has read the CSS. crossorigin is required
+       for fonts, even from the same site. -->
+  <link rel="preload" href="fonts/cormorant-garamond.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/jost.woff2" as="font" type="font/woff2" crossorigin>
 
   <link rel="stylesheet" href="style.css">
 
@@ -125,6 +128,7 @@
                  file that still looks sharp on that screen. -->
             <img src="images/orchestra-and-choir.webp"
                  srcset="images/orchestra-and-choir-600.webp 600w,
+                         images/orchestra-and-choir-900.webp 900w,
                          images/orchestra-and-choir.webp 1200w"
                  sizes="(min-width: 80em) 31rem, (min-width: 48em) 42rem, calc(100vw - 2.5rem)"
                  alt="A full orchestra and choir taking their bows on a wooden concert stage, with soloists at the front and an applauding audience in the foreground"
