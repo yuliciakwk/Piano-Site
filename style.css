@@ -849,8 +849,14 @@ section h2::after,
   transform: translate(0.75rem, 0.75rem);  /* ...then nudged down and right */
 }
 
+/* The photo is tall and narrow (666 x 1110), so it is shown at 4:5,
+   like a printed portrait. object-fit: cover fills that shape without
+   stretching; object-position keeps her face in the frame. */
 .about-portrait img {
   width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 50% 60%;
 }
 
 /* Desktop: an asymmetric, editorial layout. The heading (and portrait)
