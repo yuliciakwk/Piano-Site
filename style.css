@@ -1126,6 +1126,38 @@ section h2::after,
 }
 
 
+/* Lesson lengths: a short list under the rate, each row a length, a
+   dotted leader line, then the price, like the performance listings */
+.price-options {
+  max-width: 18rem;
+  margin: 0 auto var(--space-md);
+  padding: 0;
+}
+
+.price-options li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding-block: 0.35rem;
+}
+
+/* The dotted leader fills the space between length and price */
+.price-options li::after {
+  content: "";
+  order: 1;
+  flex: 1;
+  border-bottom: 1px dotted var(--line-color);
+}
+
+.price-amount {
+  order: 2;
+  color: var(--heading-color);
+  font-family: var(--font-serif);
+  font-size: 1.375rem;
+  font-variant-numeric: lining-nums;
+}
+
+
 /* ---------- 11. Teaching approach and quote ----------
    The quote is the page's big dramatic moment: set very large in
    italic, between two hairlines, with the author's name framed by
